@@ -1,30 +1,100 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { societies } from "@/data/societies";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function SocietiesShowcase() {
-  const container: Variants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+  const [activeNode, setActiveNode] = useState<any>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
+
+  const nodes = [
+    ...societies,
+    { 
+      id: 'view-all', 
+      name: 'Explore All Societies', 
+      shortName: 'ALL', 
+      isViewAll: true, 
+      slug: '' 
+    }
+  ];
+
+  const innerNodes = nodes.filter((_, i) => i % 2 === 0);
+  const outerNodes = nodes.filter((_, i) => i % 2 !== 0);
+
+  const handleNodeClick = (e: React.MouseEvent, node: any) => {
+    if (isTouchDevice && activeNode?.id !== node.id) {
+      e.preventDefault();
+      setActiveNode(node);
     }
   };
 
-  const item: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  const renderNodes = (nodeList: any[], isInner: boolean) => {
+    return nodeList.map((node, i) => {
+      const angle = (i / nodeList.length) * 360;
+      const radiusVar = isInner ? 'var(--orbit-radius-inner)' : 'var(--orbit-radius-outer)';
+      const itemClass = isInner ? 'orbit-item-inner' : 'orbit-item-outer';
+      
+      return (
+        <div 
+          key={node.id}
+          className="absolute top-1/2 left-1/2 w-0 h-0"
+          style={{ transform: `rotate(${angle}deg)` }}
+        >
+          <div 
+            className="absolute"
+            style={{ transform: `translateY(calc(-1 * ${radiusVar}))` }}
+          >
+            <div className={itemClass}>
+               <div 
+                 style={{ transform: `rotate(${-angle}deg)` }}
+                 className="w-12 h-12 md:w-16 md:h-16 -ml-6 -mt-6 md:-ml-8 md:-mt-8"
+                 onMouseEnter={() => !isTouchDevice && setActiveNode(node)}
+                 onMouseLeave={() => !isTouchDevice && setActiveNode(null)}
+               >
+                 <Link 
+                   href={node.isViewAll ? "/societies" : `/societies/${node.slug}`} 
+                   onClick={(e) => handleNodeClick(e, node)}
+                   className="block w-full h-full outline-none focus:ring-2 focus:ring-ieee-blue rounded-full"
+                 >
+                   <motion.div 
+                     whileHover={{ scale: 1.15 }}
+                     className={`w-full h-full rounded-full flex items-center justify-center shadow-lg transition-all duration-300 relative overflow-hidden group ${
+                       node.isViewAll 
+                       ? 'bg-white border-2 border-dashed border-ieee-blue text-ieee-blue' 
+                       : `bg-white border-2 border-white text-white ${node.accentColor || 'bg-ieee-blue'}`
+                     }`}
+                   >
+                     {node.isViewAll ? (
+                       <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform md:w-5 md:h-5" />
+                     ) : (
+                       <span className="font-bold text-[11px] md:text-base tracking-wider z-10">{node.shortName}</span>
+                     )}
+                     {/* Glossy reflection */}
+                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-white/60 opacity-40"></div>
+                   </motion.div>
+                 </Link>
+               </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
   };
 
   return (
     <section className="py-24 relative overflow-hidden bg-slate-50/50">
-      <div className="container mx-auto px-6 md:px-12 lg:px-20">
-        <div className="text-center mb-16">
+      {/* Background decorations */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-ieee-blue/5 rounded-full blur-3xl -z-10"></div>
+      
+      <div className="container mx-auto px-4 md:px-12 lg:px-20 relative z-10">
+        <div className="text-center mb-10 md:mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -40,66 +110,133 @@ export default function SocietiesShowcase() {
             transition={{ delay: 0.1 }}
             className="text-muted-foreground max-w-2xl mx-auto"
           >
-            Discover the 13 specialized student chapters driving innovation across various engineering and technology domains.
+            Discover the specialized student chapters driving innovation across various engineering and technology domains.
           </motion.p>
         </div>
 
-        <motion.div 
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-          {societies.map((society) => (
-            <motion.div key={society.id} variants={item} className="h-full">
-              <Link href={`/societies/${society.slug}`} className="block h-full">
-                <motion.div 
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative h-full p-6 rounded-2xl glass border border-pale-silver/40 hover:border-accent-cyan/30 transition-all duration-300 overflow-hidden flex flex-col"
-                >
-                  {/* Hover Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-transparent to-ieee-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold ${society.accentColor} shadow-md`}>
-                        {society.shortName}
-                      </div>
-                      <h3 className="font-heading font-semibold text-lg leading-tight group-hover:text-ieee-blue transition-colors">
-                        {society.name}
-                      </h3>
-                    </div>
-                    
-                    <p className="text-sm text-muted-foreground mb-6 flex-grow">
-                      {society.description}
-                    </p>
-                    
-                    <div className="flex items-center text-sm font-medium text-ieee-blue opacity-80 group-hover:opacity-100 mt-auto">
-                      Explore Chapter 
-                      <ArrowRight size={16} className="ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                    </div>
-                  </div>
-                </motion.div>
-              </Link>
-            </motion.div>
-          ))}
+        {/* Orbit Interactive Visualization */}
+        <div className="relative w-full max-w-3xl mx-auto h-[420px] md:h-[650px] flex items-center justify-center orbit-wrapper mt-8 md:mt-12">
+          
+          <style dangerouslySetInnerHTML={{ __html: `
+            :root {
+              --orbit-radius-inner: 130px;
+              --orbit-radius-outer: 195px;
+            }
+            @media (min-width: 768px) {
+              :root {
+                --orbit-radius-inner: 190px;
+                --orbit-radius-outer: 290px;
+              }
+            }
+            .orbit-container-inner {
+              animation: spin 40s linear infinite;
+            }
+            .orbit-container-outer {
+              animation: spin-reverse 55s linear infinite;
+            }
+            .orbit-item-inner {
+              animation: counter-spin 40s linear infinite;
+            }
+            .orbit-item-outer {
+              animation: counter-spin-reverse 55s linear infinite;
+            }
+            .orbit-wrapper:hover .orbit-container-inner,
+            .orbit-wrapper:hover .orbit-container-outer,
+            .orbit-wrapper:hover .orbit-item-inner,
+            .orbit-wrapper:hover .orbit-item-outer {
+              animation-play-state: paused;
+            }
+            @keyframes spin {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(360deg); }
+            }
+            @keyframes spin-reverse {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(-360deg); }
+            }
+            @keyframes counter-spin {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(-360deg); }
+            }
+            @keyframes counter-spin-reverse {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(360deg); }
+            }
+          `}} />
 
-          {/* View All Card */}
-          <motion.div variants={item} className="h-full">
-            <Link href="/societies" className="block h-full">
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="group relative h-full p-6 rounded-2xl border-2 border-dashed border-pale-silver hover:border-ieee-blue/50 bg-transparent transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[200px]"
-              >
-                <div className="w-12 h-12 rounded-full bg-ieee-blue/10 flex items-center justify-center text-ieee-blue mb-3 group-hover:bg-ieee-blue group-hover:text-white transition-colors">
-                  <ArrowRight size={24} />
-                </div>
-                <h3 className="font-heading font-semibold text-lg">View All 13 Societies</h3>
-              </motion.div>
-            </Link>
-          </motion.div>
-        </motion.div>
+          {/* Orbit Rings Decorations */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(var(--orbit-radius-inner)*2)] h-[calc(var(--orbit-radius-inner)*2)] rounded-full border border-ieee-blue/10"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(var(--orbit-radius-outer)*2)] h-[calc(var(--orbit-radius-outer)*2)] rounded-full border border-dashed border-ieee-blue/20"></div>
+
+          {/* Inner Nodes */}
+          <div className="absolute inset-0 orbit-container-inner">
+             {renderNodes(innerNodes, true)}
+          </div>
+          
+          {/* Outer Nodes */}
+          <div className="absolute inset-0 orbit-container-outer">
+             {renderNodes(outerNodes, false)}
+          </div>
+
+          {/* Central Hub */}
+          <div className="relative z-10 w-40 h-40 md:w-64 md:h-64 rounded-full bg-white/90 backdrop-blur-md border border-white/50 shadow-[0_0_40px_-10px_rgba(0,98,155,0.2)] flex flex-col items-center justify-center text-center p-3 md:p-6 overflow-hidden">
+            {/* Subtle inner glow */}
+            <div className={`absolute inset-0 opacity-10 transition-colors duration-500 ${activeNode && !activeNode.isViewAll ? activeNode.accentColor : 'bg-ieee-blue'}`}></div>
+            
+            <AnimatePresence mode="wait">
+              {activeNode ? (
+                <motion.div
+                  key={activeNode.id}
+                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex flex-col items-center relative z-10 w-full"
+                >
+                   {activeNode.isViewAll ? (
+                     <>
+                       <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-ieee-blue/10 flex items-center justify-center text-ieee-blue mb-2 md:mb-3">
+                          <ArrowRight size={20} className="md:w-6 md:h-6" />
+                       </div>
+                       <h3 className="font-bold text-xs md:text-lg text-slate-900 leading-tight">View All Societies</h3>
+                       <p className="text-[9px] md:text-xs text-slate-500 mt-1 md:mt-2">Click to explore directory</p>
+                     </>
+                   ) : (
+                     <>
+                       <div className={`w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white font-bold mb-1 md:mb-2 shadow-inner text-[10px] md:text-base ${activeNode.accentColor}`}>
+                          {activeNode.shortName}
+                       </div>
+                       <h3 className="font-bold text-[11px] md:text-base leading-tight mb-1 md:mb-2 text-slate-900 px-1">{activeNode.name}</h3>
+                       <p className="text-[9px] md:text-xs text-slate-600 line-clamp-3 md:line-clamp-4 px-1 leading-snug">
+                         {activeNode.description}
+                       </p>
+                       {isTouchDevice && (
+                         <p className="text-[8px] text-ieee-blue mt-1 font-bold tracking-wider">TAP TO VISIT</p>
+                       )}
+                     </>
+                   )}
+                </motion.div>
+              ) : (
+                <motion.div
+                   key="default"
+                   initial={{ opacity: 0 }}
+                   animate={{ opacity: 1 }}
+                   exit={{ opacity: 0 }}
+                   className="relative z-10"
+                >
+                   <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-ieee-blue to-accent-cyan flex items-center justify-center text-white mx-auto mb-2 md:mb-3 shadow-lg">
+                      <span className="font-bold text-base md:text-2xl">{societies.length}</span>
+                   </div>
+                   <h3 className="font-bold text-slate-900 text-xs md:text-lg">IEEE Societies</h3>
+                   <p className="text-[8px] md:text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">
+                     {isTouchDevice ? 'Tap icons to explore' : 'Hover to explore'}
+                   </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+        </div>
       </div>
     </section>
   );
