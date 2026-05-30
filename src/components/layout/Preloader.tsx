@@ -8,22 +8,12 @@ export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Lock scrolling while preloader is active
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-
     // Show the preloader for exactly 2.5 seconds for the full rocket effect
     const timer = setTimeout(() => {
       setIsLoading(false);
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
     }, 2500);
 
-    return () => {
-      clearTimeout(timer);
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   // Generate some random stars for the background
