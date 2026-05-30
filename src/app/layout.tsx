@@ -5,6 +5,7 @@ import LenisWrapper from "@/components/layout/LenisWrapper";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import InteractiveBackground from "@/components/layout/InteractiveBackground";
+import Preloader from "@/components/layout/Preloader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <Preloader />
         <InteractiveBackground />
         <LenisWrapper>
           <Navbar />
