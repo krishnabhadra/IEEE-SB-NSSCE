@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import InteractiveBackground from "@/components/layout/InteractiveBackground";
 import Preloader from "@/components/layout/Preloader";
+import ScrollProgressRocket from "@/components/layout/ScrollProgressRocket";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans">
         <Preloader />
         <InteractiveBackground />
+        <ScrollProgressRocket />
         <LenisWrapper>
           <Navbar />
           <main className="flex-1">{children}</main>
