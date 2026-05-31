@@ -4,7 +4,7 @@ import "./globals.css";
 import LenisWrapper from "@/components/layout/LenisWrapper";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import InteractiveBackground from "@/components/layout/InteractiveBackground";
+
 import Preloader from "@/components/layout/Preloader";
 import ScrollProgressRocket from "@/components/layout/ScrollProgressRocket";
 
@@ -31,11 +31,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-screen flex flex-col font-sans">
         <Preloader />
-        <InteractiveBackground />
+
         <ScrollProgressRocket />
         <LenisWrapper>
           <Navbar />

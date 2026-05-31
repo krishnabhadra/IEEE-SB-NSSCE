@@ -227,6 +227,41 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
+          {/* Flying Birds Flock 2 (Right to Left) */}
+          <motion.div
+            animate={{ x: ["110vw", "-20vw"], y: ["12vh", "4vh", "15vh"] }}
+            transition={{
+              x: { duration: 55, repeat: Infinity, ease: "linear", delay: 5 },
+              y: { duration: 20, repeat: Infinity, ease: "easeInOut", repeatType: "mirror" }
+            }}
+            className="absolute top-[12%] right-0 w-28 h-28 opacity-50 text-[#2d3748] pointer-events-none -z-10 transform -scale-x-100"
+          >
+            {/* Bird 1 */}
+            <motion.div className="absolute top-2 left-0" animate={{ y: [0, -4, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}>
+              <motion.svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" animate={{ scaleY: [1, 0.3, 1] }} transition={{ duration: 0.6, repeat: Infinity, ease: "easeInOut" }}>
+                <path d="M2 12 Q 7 5 12 12 Q 17 5 22 12" strokeLinecap="round" strokeLinejoin="round" />
+              </motion.svg>
+            </motion.div>
+            {/* Bird 2 */}
+            <motion.div className="absolute top-6 left-10" animate={{ y: [0, -6, 0] }} transition={{ duration: 2.1, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}>
+              <motion.svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" animate={{ scaleY: [1, 0.4, 1] }} transition={{ duration: 0.65, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}>
+                <path d="M2 12 Q 7 5 12 12 Q 17 5 22 12" strokeLinecap="round" strokeLinejoin="round" />
+              </motion.svg>
+            </motion.div>
+            {/* Bird 3 */}
+            <motion.div className="absolute top-10 left-4" animate={{ y: [0, -5, 0] }} transition={{ duration: 1.9, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}>
+              <motion.svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" animate={{ scaleY: [1, 0.35, 1] }} transition={{ duration: 0.55, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}>
+                <path d="M2 12 Q 7 5 12 12 Q 17 5 22 12" strokeLinecap="round" strokeLinejoin="round" />
+              </motion.svg>
+            </motion.div>
+            {/* Bird 4 */}
+            <motion.div className="absolute top-14 left-12" animate={{ y: [0, -3, 0] }} transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}>
+              <motion.svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" animate={{ scaleY: [1, 0.5, 1] }} transition={{ duration: 0.6, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}>
+                <path d="M2 12 Q 7 5 12 12 Q 17 5 22 12" strokeLinecap="round" strokeLinejoin="round" />
+              </motion.svg>
+            </motion.div>
+          </motion.div>
+
           <img
             src="https://sb-dataset.vercel.app/hero/NSS.png"
             alt="NSSCE Campus"

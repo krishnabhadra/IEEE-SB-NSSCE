@@ -91,12 +91,12 @@ export default function SocietiesShowcase() {
   };
 
   return (
-    <section className="py-24 relative overflow-hidden bg-slate-50/50">
+    <section className="pt-12 pb-24 relative overflow-hidden bg-slate-50/50">
       {/* Background decorations */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-ieee-blue/5 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-4 md:px-12 lg:px-20 relative z-10">
-        <div className="text-center mb-10 md:mb-16">
+        <div className="text-center mt-8 mb-10 md:mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

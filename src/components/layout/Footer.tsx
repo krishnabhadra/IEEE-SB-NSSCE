@@ -22,13 +22,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           {/* Brand & Newsletter */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-ieee-blue rounded-md flex items-center justify-center text-white font-bold text-xl">
-                I
-              </div>
-              <span className="font-heading font-bold text-xl text-ieee-blue tracking-tight">
-                IEEE SB NSSCE
-              </span>
+            <Link href="/" className="inline-block mb-6">
+              <img 
+                src="/logo.png" 
+                alt="IEEE SB NSSCE Logo" 
+                className="h-10 w-auto object-contain drop-shadow-sm hover:scale-105 transition-transform" 
+              />
             </Link>
             <p className="text-black mb-8 max-w-sm">
               Empowering students to innovate and build the future through technology, leadership, and global networking.
@@ -56,10 +55,17 @@ export default function Footer() {
           <div>
             <h4 className="font-heading font-semibold text-lg mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              {['Home', 'About Us', 'Events', 'Team', 'Achievements', 'Contact'].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="text-black hover:text-ieee-blue transition-colors text-sm flex items-center gap-1 group">
-                    {item}
+              {[
+                { name: 'Home', href: '/' },
+                { name: 'About Us', href: '/#about' },
+                { name: 'Events', href: '/events' },
+                { name: 'Team', href: '/team' },
+                { name: 'Achievements', href: '/achievements' },
+                { name: 'Gallery', href: '/gallery' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-black hover:text-ieee-blue transition-colors text-sm flex items-center gap-1 group">
+                    {item.name}
                     <ArrowUpRight size={14} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </Link>
                 </li>
@@ -71,10 +77,17 @@ export default function Footer() {
           <div>
             <h4 className="font-heading font-semibold text-lg mb-6">Societies</h4>
             <ul className="space-y-3">
-              {['Computer Society', 'Power & Energy', 'Robotics & Auto', 'Women In Eng.', 'ComSoc', 'More...'].map((item) => (
-                <li key={item}>
-                  <Link href="/societies" className="text-black hover:text-ieee-blue transition-colors text-sm">
-                    {item}
+              {[
+                { name: 'Computer Society', href: '/societies/computer-society' },
+                { name: 'Power & Energy', href: '/societies/power-energy-society' },
+                { name: 'Robotics & Auto', href: '/societies/robotics-automation-society' },
+                { name: 'Women In Eng.', href: '/societies/women-in-engineering' },
+                { name: 'ComSoc', href: '/societies/communications-society' },
+                { name: 'View All', href: '/societies' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-black hover:text-ieee-blue transition-colors text-sm">
+                    {item.name}
                   </Link>
                 </li>
               ))}
@@ -95,16 +108,13 @@ export default function Footer() {
               </a>
             </div>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-pale-silver flex items-center justify-center text-black hover:text-ieee-blue hover:border-ieee-blue transition-all hover:scale-110">
+              <a href="https://www.linkedin.com/company/ieeesbnssce" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-pale-silver flex items-center justify-center text-black hover:text-ieee-blue hover:border-ieee-blue transition-all hover:scale-110">
                 <SocialIcon name="linkedin" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-pale-silver flex items-center justify-center text-black hover:text-ieee-blue hover:border-ieee-blue transition-all hover:scale-110">
+              <a href="https://www.instagram.com/ieeesbnssce" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-pale-silver flex items-center justify-center text-black hover:text-ieee-blue hover:border-ieee-blue transition-all hover:scale-110">
                 <SocialIcon name="instagram" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-pale-silver flex items-center justify-center text-black hover:text-ieee-blue hover:border-ieee-blue transition-all hover:scale-110">
-                <SocialIcon name="twitter" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-pale-silver flex items-center justify-center text-black hover:text-ieee-blue hover:border-ieee-blue transition-all hover:scale-110">
+              <a href="https://github.com/IEEE-NSSCE" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-pale-silver flex items-center justify-center text-black hover:text-ieee-blue hover:border-ieee-blue transition-all hover:scale-110">
                 <SocialIcon name="github" />
               </a>
             </div>
@@ -113,9 +123,14 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-pale-silver flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-black font-medium">
-            © {new Date().getFullYear()} IEEE Student Branch NSSCE. All rights reserved.
-          </p>
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <p className="text-xs text-black font-medium">
+              © {new Date().getFullYear()} IEEE Student Branch NSSCE. All rights reserved.
+            </p>
+            <p className="text-xs text-black/70 font-medium">
+              Developed by Web Team, IEEE SB NSSCE
+            </p>
+          </div>
           <div className="flex gap-6">
             <a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" className="text-xs text-black hover:text-ieee-blue">IEEE.org</a>
             <a href="https://ieeexplore.ieee.org/" target="_blank" rel="noopener noreferrer" className="text-xs text-black hover:text-ieee-blue">IEEE Xplore</a>
