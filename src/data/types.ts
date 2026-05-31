@@ -17,6 +17,7 @@ export interface Member {
   name: string;
   position: string;
   societyId: string | 'execom';
+  year: number;
   photo: string;
   linkedin?: string;
   github?: string;

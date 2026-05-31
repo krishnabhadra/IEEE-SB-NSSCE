@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 import { members } from "@/data/members";
 import { societies } from "@/data/societies";
 
@@ -15,6 +15,17 @@ const SocialIcon = ({ name }: { name: string }) => {
 export default function TeamPage() {
   const [activeTab, setActiveTab] = useState<string>("execom");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedYear, setSelectedYear] = useState<number>(2024);
+  const tabsRef = useRef<HTMLDivElement>(null);
+
+  const scrollTabs = (direction: 'left' | 'right') => {
+    if (tabsRef.current) {
+      const scrollAmount = 200;
+      tabsRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const years = Array.from({ length: 2026 - 2018 + 1 }, (_, i) => 2026 - i);
 
   const tabs = [
     { id: "execom", name: "SB ExeCom" },
@@ -23,9 +34,10 @@ export default function TeamPage() {
 
   const filteredMembers = members.filter(member => {
     const matchesTab = member.societyId === activeTab;
+    const matchesYear = member.year === selectedYear;
     const matchesSearch = member.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           member.position.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesTab && matchesSearch;
+    return matchesTab && matchesYear && matchesSearch;
   });
 
   return (
@@ -58,55 +70,97 @@ export default function TeamPage() {
       {/* Controls: Search and Tabs */}
       <section className="container mx-auto px-6 md:px-12 lg:px-20 mb-16">
         <div className="flex flex-col items-center gap-8">
-          {/* Search Bar */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="relative w-full max-w-md"
-          >
-            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground">
-              <Search size={20} />
-            </div>
-            <input
-              type="text"
-              placeholder="Search members by name or role..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-full bg-white border border-pale-silver focus:outline-none focus:ring-2 focus:ring-ieee-blue/50 shadow-sm transition-all"
-            />
-          </motion.div>
+          {/* Search and Year Controls */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-2xl">
+            {/* Year Selector */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="w-full md:w-auto"
+            >
+              <select
+                value={selectedYear}
+                onChange={(e) => setSelectedYear(Number(e.target.value))}
+                className="w-full md:w-40 px-4 py-4 rounded-full bg-white border border-pale-silver focus:outline-none focus:ring-2 focus:ring-ieee-blue/50 shadow-sm transition-all text-muted-foreground font-medium appearance-none cursor-pointer text-center"
+              >
+                {years.map(year => (
+                  <option key={year} value={year}>{year} ExeCom</option>
+                ))}
+              </select>
+            </motion.div>
 
-          {/* Tabs */}
+            {/* Search Bar */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="relative w-full flex-1"
+            >
+              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground">
+                <Search size={20} />
+              </div>
+              <input
+                type="text"
+                placeholder="Search members by name or role..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-4 py-4 rounded-full bg-white border border-pale-silver focus:outline-none focus:ring-2 focus:ring-ieee-blue/50 shadow-sm transition-all"
+              />
+            </motion.div>
+          </div>
+
+          {/* Tabs Container with Arrows */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="w-full overflow-x-auto pb-4 no-scrollbar"
+            className="w-full relative flex items-center"
           >
-            <div className="flex items-center justify-center min-w-max gap-2 px-4">
-              {tabs.map((tab) => {
-                const isActive = activeTab === tab.id;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                      isActive ? "text-ieee-blue" : "text-muted-foreground hover:text-foreground hover:bg-slate-100"
-                    }`}
-                  >
-                    <span className="relative z-10">{tab.name}</span>
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeTab"
-                        className="absolute inset-0 bg-white border border-pale-silver shadow-sm rounded-full z-0"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
+            {/* Left Arrow */}
+            <button 
+              onClick={() => scrollTabs('left')}
+              className="absolute left-0 z-10 w-8 h-full bg-gradient-to-r from-slate-50 to-transparent flex items-center justify-start text-muted-foreground hover:text-ieee-blue transition-colors focus:outline-none hidden md:flex"
+            >
+              <ChevronLeft size={24} className="bg-white rounded-full shadow-sm" />
+            </button>
+
+            <div 
+              ref={tabsRef}
+              className="w-full overflow-x-auto pb-4 pt-1 no-scrollbar md:px-8"
+            >
+              <div className="flex items-center gap-2 px-4 w-max">
+                {tabs.map((tab) => {
+                  const isActive = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                        isActive ? "text-ieee-blue" : "text-muted-foreground hover:text-foreground hover:bg-slate-100"
+                      }`}
+                    >
+                      <span className="relative z-10">{tab.name}</span>
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeTab"
+                          className="absolute inset-0 bg-white border border-pale-silver shadow-sm rounded-full z-0"
+                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
+
+            {/* Right Arrow */}
+            <button 
+              onClick={() => scrollTabs('right')}
+              className="absolute right-0 z-10 w-8 h-full bg-gradient-to-l from-slate-50 to-transparent flex items-center justify-end text-muted-foreground hover:text-ieee-blue transition-colors focus:outline-none hidden md:flex"
+            >
+              <ChevronRight size={24} className="bg-white rounded-full shadow-sm" />
+            </button>
           </motion.div>
         </div>
       </section>
