@@ -6,8 +6,21 @@ import { Rocket } from "lucide-react";
 
 export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
+  const [stars, setStars] = useState<any[]>([]);
 
   useEffect(() => {
+    // Generate random stars only on the client to prevent hydration mismatch
+    setStars(
+      Array.from({ length: 50 }).map((_, i) => ({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        size: Math.random() * 3 + 1,
+        delay: Math.random() * 2,
+        duration: Math.random() * 3 + 2,
+      }))
+    );
+
     // Show the preloader for exactly 2.5 seconds for the full rocket effect
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -15,16 +28,6 @@ export default function Preloader() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  // Generate some random stars for the background
-  const stars = Array.from({ length: 50 }).map((_, i) => ({
-    id: i,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    size: Math.random() * 3 + 1,
-    delay: Math.random() * 2,
-    duration: Math.random() * 3 + 2,
-  }));
 
   return (
     <AnimatePresence>
