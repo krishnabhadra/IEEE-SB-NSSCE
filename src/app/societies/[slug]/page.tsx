@@ -15,7 +15,7 @@ export default async function SocietyDetailPage({ params }: { params: Promise<{ 
   }
 
   // Get data specific to this society
-  const societyMembers = members.filter(m => m.societyId === society.id);
+  const societyMembers = members.filter(m => m.societyId === society.id && m.year === 2026);
   const societyEvents = events.filter(e => e.societyId === society.id).slice(0, 3); // Get latest 3 events
 
   return (
