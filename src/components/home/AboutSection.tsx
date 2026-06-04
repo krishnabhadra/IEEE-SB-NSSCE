@@ -9,13 +9,13 @@ function AnimatedCounter({ value, label, icon: Icon }: { value: number, label: s
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [hasAnimated, setHasAnimated] = useState(false);
-  
+
   const springValue = useSpring(0, {
     stiffness: 50,
     damping: 20,
     mass: 1,
   });
-  
+
   const displayValue = useTransform(springValue, (current) => Math.round(current));
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function AnimatedCounter({ value, label, icon: Icon }: { value: number, label: s
   }, [isInView, springValue, value, hasAnimated]);
 
   return (
-    <motion.div 
+    <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -34,18 +34,18 @@ function AnimatedCounter({ value, label, icon: Icon }: { value: number, label: s
       className="p-6 rounded-2xl bg-white border border-pale-silver shadow-sm flex flex-col items-center justify-center text-center relative overflow-hidden group hover:shadow-md transition-shadow"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-ieee-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      
+
       <div className="w-12 h-12 rounded-full bg-ieee-blue/10 text-ieee-blue flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
         <Icon size={24} />
       </div>
-      
+
       <div className="flex items-baseline gap-1 mb-1">
         <motion.span className="text-4xl font-heading font-bold text-foreground">
           {displayValue}
         </motion.span>
         <span className="text-2xl font-bold text-ieee-blue">+</span>
       </div>
-      
+
       <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{label}</span>
     </motion.div>
   );
@@ -63,11 +63,11 @@ export default function AboutSection() {
     <section className="py-24 relative overflow-hidden bg-sky-50">
       {/* Decorative background element */}
       <div className="absolute top-1/2 -translate-y-1/2 left-0 w-1/3 h-1/2 bg-accent-cyan/5 rounded-full blur-[100px] -z-10" />
-      
+
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Side: Text */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -78,25 +78,25 @@ export default function AboutSection() {
               <span className="w-2 h-2 rounded-full bg-ieee-blue"></span>
               About Our Chapter
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6 leading-tight">
               Driving Technological <span className="text-gradient">Excellence</span> Since 2001
             </h2>
-            
+
             <div className="space-y-6 text-lg text-muted-foreground">
               <p>
-                The IEEE Student Branch at NSS College of Engineering is a vibrant community of passionate students dedicated to advancing technology for humanity. 
+                The IEEE Student Branch at NSS College of Engineering is a vibrant community of passionate students dedicated to advancing technology for humanity.
               </p>
               <p>
                 With 13 distinct technical societies, we provide a platform for students to collaborate, innovate, and develop leadership skills that will shape the future of engineering and technology globally.
               </p>
             </div>
-            
+
             <div className="mt-10 flex gap-4">
               <div className="flex -space-x-4">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={`about-avatar-${i}`} className={`w-12 h-12 rounded-full border-2 border-white shadow-sm flex items-center justify-center font-bold text-white z-${5-i}`} style={{ backgroundColor: ['#00629B', '#00C2FF', '#5F9EA0', '#FF9900'][i-1] }}>
-                    {['C', 'P', 'R', 'W'][i-1]}
+                  <div key={`about-avatar-${i}`} className={`w-12 h-12 rounded-full border-2 border-white shadow-sm flex items-center justify-center font-bold text-white z-${5 - i}`} style={{ backgroundColor: ['#00629B', '#00C2FF', '#5F9EA0', '#FF9900'][i - 1] }}>
+                    {['C', 'P', 'R', 'W'][i - 1]}
                   </div>
                 ))}
               </div>
@@ -106,7 +106,7 @@ export default function AboutSection() {
               </div>
             </div>
           </motion.div>
-          
+
           {/* Right Side: Stats Grid */}
           <div className="grid grid-cols-2 gap-4 md:gap-6">
             {stats.map((stat, i) => (

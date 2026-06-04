@@ -56,7 +56,7 @@ export default function AchievementsPreview() {
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-ieee-blue/20 rounded-full blur-[150px] opacity-50 pointer-events-none" />
         <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-accent-cyan/10 rounded-full blur-[150px] opacity-50 pointer-events-none" />
-        
+
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
       </div>
 
@@ -71,7 +71,7 @@ export default function AchievementsPreview() {
             >
               <Trophy className="text-yellow-400" size={24} />
             </motion.div>
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -79,7 +79,7 @@ export default function AchievementsPreview() {
             >
               A Legacy of <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">Excellence</span>
             </motion.h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -89,13 +89,13 @@ export default function AchievementsPreview() {
               Recognized globally and nationally for our consistent dedication to technological advancement and community building.
             </motion.p>
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <Link 
+            <Link
               href="/achievements"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md font-medium transition-all group"
             >
@@ -107,7 +107,7 @@ export default function AchievementsPreview() {
 
         {/* Clean Grid (Removed intersecting timeline line and dots) */}
         <div className="relative">
-          <motion.div 
+          <motion.div
             variants={container}
             initial="hidden"
             whileInView="show"
@@ -127,11 +127,11 @@ export default function AchievementsPreview() {
                         <span className="text-sm font-bold tracking-widest text-slate-400 uppercase">{highlight.year}</span>
                       </div>
                     </div>
-                    
+
                     <h3 className="font-heading font-bold text-xl mb-3">
                       {highlight.title}
                     </h3>
-                    
+
                     <p className="text-slate-400 text-sm leading-relaxed">
                       {highlight.description}
                     </p>

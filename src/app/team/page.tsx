@@ -213,7 +213,7 @@ export default function TeamPage() {
               >
                 {/* Gradient Border Wrapper */}
                 <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-sky-50 group-hover:from-ieee-blue group-hover:to-accent-cyan rounded-3xl transition-colors duration-500" />
-                
+
                 {/* Inner Card Content */}
                 <div className="relative w-full h-full bg-white rounded-[22px] overflow-hidden flex flex-col items-center text-center z-10 pt-6 pb-6 px-6">
                   {/* Decorative Top Banner */}
@@ -230,6 +230,7 @@ export default function TeamPage() {
                             src={member.photo}
                             alt={member.name}
                             fill
+                            sizes="144px"
                             className="object-cover group-hover:scale-110 transition-transform duration-700"
                           />
                         ) : (

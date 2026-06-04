@@ -23,7 +23,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           <div className={`absolute inset-0 opacity-40 ${society?.accentColor || 'bg-ieee-blue'}`} />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent" />
         </div>
-        
+
         <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 pb-16">
           <div className="max-w-4xl">
             <div className="flex flex-wrap gap-3 mb-6">
@@ -38,11 +38,11 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                 </span>
               ))}
             </div>
-            
+
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 leading-tight">
               {event.title}
             </h1>
-            
+
             <div className="flex flex-wrap gap-6 text-slate-300 font-medium text-lg">
               <div className="flex items-center gap-2">
                 <Calendar className="text-accent-cyan" size={24} />
@@ -63,7 +63,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
 
       <div className="container mx-auto px-6 md:px-12 lg:px-20 mt-12">
         <div className="flex flex-col lg:flex-row gap-12">
-          
+
           {/* Main Content */}
           <div className="w-full lg:w-2/3 space-y-16">
             {/* About */}
@@ -130,11 +130,11 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
             <div className="sticky top-32 glass p-8 rounded-3xl border border-pale-silver shadow-xl shadow-ieee-blue/5">
               <h3 className="font-heading font-bold text-2xl mb-2">Registration</h3>
               <p className="text-muted-foreground mb-6">
-                {isPast 
-                  ? "This event has already concluded." 
+                {isPast
+                  ? "This event has already concluded."
                   : "Secure your spot now before tickets run out."}
               </p>
-              
+
               <div className="space-y-4 mb-8">
                 <div className="flex justify-between pb-4 border-b border-pale-silver/50">
                   <span className="text-muted-foreground">Price</span>
@@ -158,7 +158,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
               )}
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>

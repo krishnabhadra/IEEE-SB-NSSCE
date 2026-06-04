@@ -44,11 +44,11 @@ const EventCard = ({ event }: { event: typeof events[0] }) => {
           <h3 className="font-heading font-bold text-xl mb-3 line-clamp-2 group-hover:text-ieee-blue transition-colors">
             {event.title}
           </h3>
-          
+
           <p className="text-muted-foreground text-sm line-clamp-2 mb-6">
             {event.description}
           </p>
-          
+
           <div className="space-y-2 mb-6 mt-auto">
             <div className="flex items-center text-sm text-slate-600 font-medium">
               <CalendarIcon size={16} className="mr-2 text-ieee-blue/70" />
@@ -59,9 +59,9 @@ const EventCard = ({ event }: { event: typeof events[0] }) => {
               <span className="line-clamp-1">{event.venue}</span>
             </div>
           </div>
-          
+
           <div className="pt-4 border-t border-pale-silver/50 flex items-center justify-between">
-            <Link 
+            <Link
               href={`/events/${event.slug}`}
               className="text-sm font-semibold text-ieee-blue group-hover:text-ieee-blue/80 transition-colors flex items-center gap-1"
             >
@@ -81,10 +81,10 @@ export default function EventsPage() {
   const [activeYear, setActiveYear] = useState<string>("all");
 
   const years = Array.from(new Set(events.map(e => new Date(e.date).getFullYear().toString()))).sort((a, b) => parseInt(b) - parseInt(a));
-  
+
   const filteredEvents = events.filter(event => {
-    const matchesSearch = event.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          event.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      event.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesSociety = activeSociety === "all" || event.societyId === activeSociety;
     const matchesYear = activeYear === "all" || new Date(event.date).getFullYear().toString() === activeYear;
     return matchesSearch && matchesSociety && matchesYear;
@@ -103,14 +103,14 @@ export default function EventsPage() {
         <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
             <div>
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-5xl md:text-6xl font-heading font-bold mb-4"
               >
                 Explore <span className="text-gradient">Events</span>
               </motion.h1>
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
@@ -121,7 +121,7 @@ export default function EventsPage() {
             </div>
 
             {/* Search Bar */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
@@ -141,7 +141,7 @@ export default function EventsPage() {
           </div>
 
           {/* Filters */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -149,7 +149,7 @@ export default function EventsPage() {
           >
             <div className="flex items-center gap-3">
               <span className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Society:</span>
-              <select 
+              <select
                 value={activeSociety}
                 onChange={(e) => setActiveSociety(e.target.value)}
                 className="bg-transparent border border-pale-silver rounded-md px-3 py-1.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ieee-blue/50"
@@ -160,10 +160,10 @@ export default function EventsPage() {
                 ))}
               </select>
             </div>
-            
+
             <div className="flex items-center gap-3">
               <span className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Year:</span>
-              <select 
+              <select
                 value={activeYear}
                 onChange={(e) => setActiveYear(e.target.value)}
                 className="bg-transparent border border-pale-silver rounded-md px-3 py-1.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ieee-blue/50"
