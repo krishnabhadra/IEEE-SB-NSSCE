@@ -29,22 +29,31 @@ export default function SocietiesPage() {
           <div className="w-[800px] h-[800px] bg-ieee-blue/10 rounded-full blur-[100px]" />
         </div>
 
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 text-center">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 text-center flex flex-col items-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-heading font-bold mb-6"
+            className="text-5xl md:text-7xl font-heading font-black mb-10 text-slate-900 tracking-tight"
           >
-            Our <span className="text-gradient">Societies</span>
+            Our <span className="relative inline-block"><span className="relative z-10 text-ieee-blue">Societies</span><span className="absolute bottom-1 md:bottom-2 left-0 w-full h-3 md:h-4 bg-[#FFD700] -z-0 -rotate-2" /></span>
           </motion.h1>
-          <motion.p
+          
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+            className="relative max-w-2xl mx-auto mb-10"
           >
-            Explore our 13 specialized student chapters driving innovation and excellence across diverse technological domains.
-          </motion.p>
+            <div className="absolute inset-0 bg-[#90CAF9] translate-x-1.5 translate-y-1.5 rounded-2xl pointer-events-none" />
+            <div className="absolute inset-0 bg-[#64B5F6] translate-x-3 translate-y-3 rounded-2xl pointer-events-none" />
+            <div className="absolute inset-0 bg-[#42A5F5] translate-x-4.5 translate-y-4.5 rounded-2xl pointer-events-none" />
+            
+            <div className="relative bg-white border-2 border-black p-5 md:p-8 rounded-2xl z-10 shadow-sm text-center">
+              <p className="text-lg md:text-xl text-slate-800 font-medium leading-relaxed">
+                Explore our <span className="font-bold text-ieee-blue">13 specialized student chapters</span> driving innovation and excellence across diverse technological domains.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 

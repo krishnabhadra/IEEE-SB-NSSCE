@@ -60,38 +60,46 @@ export default function TeamPage() {
             animate={{ rotate: [3, -1, 3] }}
             transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             whileHover={{ rotate: 3, transition: { duration: 0.2 } }}
-            className="w-72 bg-amber-50/90 backdrop-blur-sm p-6 shadow-xl border border-amber-200/50 cursor-pointer hover:shadow-2xl transition-shadow"
-            style={{ borderRadius: "15px 2px 15px 2px", transformOrigin: "top center" }}
+            className="w-72 bg-[#FFEB3B] p-6 border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
+            style={{ transformOrigin: "top center" }}
           >
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-slate-500/80">
-              <Pin size={24} fill="currentColor" className="drop-shadow-md" />
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-red-500">
+              <Pin size={32} fill="currentColor" className="drop-shadow-sm rotate-12" />
             </div>
-            <p className="text-sm text-slate-800 font-medium leading-relaxed italic mb-3">
+            <p className="text-sm text-black font-bold leading-relaxed italic mb-4 mt-2">
               "Leadership is not about titles or positions; it's about the actions we take and the impact we make."
             </p>
-            <p className="text-xs text-slate-500 font-semibold text-right">
+            <p className="text-xs text-black font-black text-right">
               - Ramon De la Cruz<br />
-              <span className="font-normal text-[10px] uppercase tracking-wider">IEEE Engineering Leadership</span>
+              <span className="font-bold text-[10px] uppercase tracking-wider text-slate-800">IEEE Engineering Leadership</span>
             </p>
           </motion.div>
         </motion.div>
 
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 text-center">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 text-center flex flex-col items-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-heading font-bold mb-6"
+            className="text-5xl md:text-7xl font-heading font-black mb-10 text-slate-900 tracking-tight"
           >
-            Meet the <span className="text-gradient">Team</span>
+            Meet the <span className="relative inline-block"><span className="relative z-10 text-white">Team</span><span className="absolute -bottom-1 left-0 w-full h-full bg-ieee-blue -z-0 -rotate-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" /></span>
           </motion.h1>
-          <motion.p
+          
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+            className="relative max-w-2xl mx-auto mb-10"
           >
-            The dedicated individuals working tirelessly to build a strong community of innovators and leaders.
-          </motion.p>
+            <div className="absolute inset-0 bg-[#FFD700] translate-x-1.5 translate-y-1.5 rounded-2xl pointer-events-none border-2 border-black" />
+            <div className="absolute inset-0 bg-[#FFA000] translate-x-3 translate-y-3 rounded-2xl pointer-events-none border-2 border-black" />
+            
+            <div className="relative bg-white border-2 border-black p-5 md:p-8 rounded-2xl z-10 shadow-sm text-center">
+              <p className="text-lg md:text-xl text-slate-800 font-medium leading-relaxed">
+                The dedicated individuals working tirelessly to build a strong community of innovators and leaders.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -99,23 +107,27 @@ export default function TeamPage() {
       <section className="container mx-auto px-6 md:px-12 lg:px-20 mb-16">
         <div className="flex flex-col items-center gap-8">
           {/* Search and Year Controls */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-2xl">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 w-full max-w-2xl">
             {/* Year Selector */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15 }}
-              className="w-full md:w-auto"
+              className="w-full md:w-auto relative group"
             >
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(Number(e.target.value))}
-                className="w-full md:w-40 px-4 py-4 rounded-full bg-white border border-pale-silver focus:outline-none focus:ring-2 focus:ring-ieee-blue/50 shadow-sm transition-all text-muted-foreground font-medium appearance-none cursor-pointer text-center"
+                className="w-full md:w-48 px-4 py-4 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus:outline-none transition-all text-slate-900 font-bold appearance-none cursor-pointer text-center relative z-10"
               >
                 {years.map(year => (
                   <option key={year} value={year}>{year} ExeCom</option>
                 ))}
               </select>
+              {/* Fake dropdown arrow */}
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none z-20">
+                <div className="w-0 h-0 border-l-4 border-r-4 border-t-6 border-transparent border-t-black"></div>
+              </div>
             </motion.div>
 
             {/* Search Bar */}
@@ -125,15 +137,15 @@ export default function TeamPage() {
               transition={{ delay: 0.2 }}
               className="relative w-full flex-1"
             >
-              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground">
-                <Search size={20} />
+              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-black z-20">
+                <Search size={24} className="stroke-[3px]" />
               </div>
               <input
                 type="text"
                 placeholder="Search members by name or role..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 rounded-full bg-white border border-pale-silver focus:outline-none focus:ring-2 focus:ring-ieee-blue/50 shadow-sm transition-all"
+                className="w-full pl-14 pr-4 py-4 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus:outline-none transition-all text-slate-900 font-bold placeholder-slate-500 relative z-10"
               />
             </motion.div>
           </div>
@@ -155,26 +167,21 @@ export default function TeamPage() {
 
             <div
               ref={tabsRef}
-              className="w-full overflow-x-auto pb-4 pt-1 no-scrollbar md:px-8"
+              className="w-full overflow-x-auto pb-6 pt-2 no-scrollbar md:px-8"
             >
-              <div className="flex items-center gap-2 px-4 w-max">
+              <div className="flex items-center gap-4 px-4 w-max">
                 {tabs.map((tab) => {
                   const isActive = activeTab === tab.id;
                   return (
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${isActive ? "text-ieee-blue" : "text-muted-foreground hover:text-foreground hover:bg-slate-100"
+                      className={`relative px-6 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all border-2 border-black ${isActive
+                          ? "bg-[#FFD700] text-black translate-x-[2px] translate-y-[2px] shadow-none"
+                          : "bg-white text-slate-800 hover:bg-slate-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                         }`}
                     >
                       <span className="relative z-10">{tab.name}</span>
-                      {isActive && (
-                        <motion.div
-                          layoutId="activeTab"
-                          className="absolute inset-0 bg-white border border-pale-silver shadow-sm rounded-full z-0"
-                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                        />
-                      )}
                     </button>
                   );
                 })}
@@ -209,40 +216,37 @@ export default function TeamPage() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05 }}
-                className="group relative rounded-3xl p-[1.5px] shadow-lg shadow-sky-900/5 hover:shadow-2xl hover:shadow-ieee-blue/20 transition-all duration-500 transform hover:-translate-y-2 flex flex-col"
+                className="group relative h-full flex flex-col outline-none"
               >
-                {/* Gradient Border Wrapper */}
-                <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-sky-50 group-hover:from-ieee-blue group-hover:to-accent-cyan rounded-3xl transition-colors duration-500" />
-
-                {/* Inner Card Content */}
-                <div className="relative w-full h-full bg-white rounded-[22px] overflow-hidden flex flex-col items-center text-center z-10 pt-6 pb-6 px-6">
-                  {/* Decorative Top Banner */}
-                  <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-sky-50 via-sky-100 to-white opacity-80 group-hover:from-sky-100 group-hover:to-sky-50 transition-colors duration-500" />
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-ieee-blue/5 rounded-bl-full -z-0 group-hover:scale-110 transition-transform duration-500" />
-
-                  {/* Photo with Gradient Ring */}
-                  <div className="relative z-10 mt-6 mb-5">
-                    <div className="absolute inset-0 bg-gradient-to-br from-ieee-blue to-accent-cyan rounded-full animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md" />
-                    <div className="p-[3px] rounded-full bg-gradient-to-br from-slate-200 to-slate-100 group-hover:from-ieee-blue group-hover:to-accent-cyan transition-all duration-500 relative z-10">
-                      <div className="w-36 h-36 rounded-full border-[3px] border-white bg-slate-50 relative overflow-hidden flex items-center justify-center text-4xl text-slate-300 font-bold shadow-inner">
-                        {member.photo ? (
-                          <Image
-                            src={member.photo}
-                            alt={member.name}
-                            fill
-                            sizes="144px"
-                            className="object-cover group-hover:scale-110 transition-transform duration-700"
-                          />
-                        ) : (
-                          member.name.charAt(0)
-                        )}
-                      </div>
-                    </div>
+                {/* Interactive Shadow Base */}
+                <div className="absolute inset-0 bg-ieee-blue translate-x-2 translate-y-2 rounded-xl pointer-events-none transition-transform duration-300 group-hover:translate-x-0 group-hover:translate-y-0" />
+                
+                {/* Main Card */}
+                <div className="relative h-full w-full bg-white border-2 border-black p-4 md:p-5 rounded-xl z-10 flex flex-col items-center text-center transition-transform duration-300 transform group-hover:translate-x-1 group-hover:translate-y-1">
+                  
+                  {/* Photo Container (Square Polaroid style) */}
+                  <div className="relative w-full aspect-square rounded-lg border-2 border-black bg-slate-50 overflow-hidden mb-5 flex items-center justify-center text-5xl text-slate-300 font-bold shadow-inner">
+                    {member.photo ? (
+                      <Image
+                        src={member.photo}
+                        alt={member.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 300px"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      member.name.charAt(0)
+                    )}
                   </div>
 
-                  <div className="relative z-10 flex flex-col items-center flex-grow">
-                    <h3 className="font-heading font-bold text-xl mb-1 text-slate-800 group-hover:text-ieee-blue transition-colors duration-300">{member.name}</h3>
-                    <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-sky-50 text-ieee-blue text-[11px] font-bold uppercase tracking-wider mb-2 group-hover:bg-ieee-blue group-hover:text-white transition-colors duration-300">
+                  {/* Text Container */}
+                  <div className="flex flex-col items-center flex-grow w-full justify-between">
+                    <h3 className="font-heading font-black text-xl mb-4 text-slate-900 leading-tight">
+                      {member.name}
+                    </h3>
+                    
+                    {/* Position Badge */}
+                    <div className="w-full px-3 py-2 rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-900 bg-[#FFD700] border-2 border-black text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] leading-tight">
                       {member.position}
                     </div>
                   </div>
