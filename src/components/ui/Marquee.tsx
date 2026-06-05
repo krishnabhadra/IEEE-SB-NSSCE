@@ -23,11 +23,11 @@ export default function Marquee({
   const xAnimation = direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"];
   
   return (
-    <div className={`relative w-[110vw] left-1/2 -translate-x-1/2 ${rotate} ${bgColor} border-y-4 border-black overflow-hidden py-3 -my-4 z-20 shadow-[0_4px_0_0_rgba(0,0,0,1)]`}>
+    <div className={`relative w-[110vw] left-1/2 -translate-x-1/2 ${rotate} ${bgColor} border-y-4 border-black overflow-hidden py-2 -my-3 z-20`}>
       <div className="flex whitespace-nowrap">
         <motion.div
           key={`marquee-${direction}-150`}
-          className="flex whitespace-nowrap gap-6 items-center"
+          className="flex whitespace-nowrap gap-4 items-center"
           animate={{ x: xAnimation }}
           transition={{
             x: {
@@ -40,13 +40,13 @@ export default function Marquee({
         >
           {/* Double the content so it loops seamlessly */}
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex gap-6 items-center">
+            <div key={i} className="flex gap-4 items-center">
               {[...Array(repeat)].map((_, j) => (
-                <div key={j} className="flex items-center gap-6">
-                  <span className={`font-heading text-lg md:text-xl font-black tracking-widest uppercase ${textColor}`}>
+                <div key={j} className="flex items-center gap-4">
+                  <span className={`font-heading text-sm md:text-base font-black tracking-widest uppercase ${textColor}`}>
                     {text}
                   </span>
-                  <Sparkles size={20} className={`${textColor} stroke-[3px]`} />
+                  <Sparkles size={16} className={`${textColor} stroke-[3px]`} />
                 </div>
               ))}
             </div>

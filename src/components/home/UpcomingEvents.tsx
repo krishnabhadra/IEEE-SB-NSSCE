@@ -113,7 +113,7 @@ export default function UpcomingEvents() {
                       href={`/events/${event.slug}`}
                       className="text-sm font-black uppercase tracking-widest text-ieee-blue group-hover:text-accent-cyan transition-colors"
                     >
-                      Register
+                      {event.status === 'past' ? 'View Details' : 'Register Now'}
                     </Link>
                   </div>
                 </div>

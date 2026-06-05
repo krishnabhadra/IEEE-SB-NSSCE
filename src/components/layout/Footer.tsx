@@ -167,20 +167,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t-4 border-black/20 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <p className="text-sm text-black font-black">
-              © {new Date().getFullYear()} IEEE Student Branch NSSCE. All rights reserved.
-            </p>
-            <p className="text-xs text-black font-bold">
-              Developed by Web Team, IEEE SB NSSCE
-            </p>
-          </div>
-          <div className="flex gap-6">
-            <a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" className="text-xs font-black bg-white px-2 py-1 border-2 border-black/50 rounded shadow-[2px_2px_0px_0px_rgba(0,0,0,0.5)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none hover:border-black transition-all">IEEE.org</a>
-            <a href="https://ieeexplore.ieee.org/" target="_blank" rel="noopener noreferrer" className="text-xs font-black bg-white px-2 py-1 border-2 border-black/50 rounded shadow-[2px_2px_0px_0px_rgba(0,0,0,0.5)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none hover:border-black transition-all">IEEE Xplore</a>
-            <a href="https://www.ieee.org/sitemap.html" target="_blank" rel="noopener noreferrer" className="text-xs font-black bg-white px-2 py-1 border-2 border-black/50 rounded shadow-[2px_2px_0px_0px_rgba(0,0,0,0.5)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none hover:border-black transition-all">Sitemap</a>
-          </div>
+        <div className="pt-8 border-t-4 border-black flex flex-col items-center justify-center gap-2 relative z-10 text-center">
+          <p className="text-sm text-black font-black">
+            © {new Date().getFullYear()} IEEE Student Branch NSSCE. All rights reserved.
+          </p>
+          <p className="text-xs text-black font-bold">
+            Developed by Web Team | Execom'26, IEEE SB NSSCE
+          </p>
         </div>
       </div>
     </footer>

@@ -65,7 +65,7 @@ const EventCard = ({ event }: { event: typeof events[0] }) => {
               href={`/events/${event.slug}`}
               className="text-sm font-black uppercase tracking-widest text-ieee-blue group-hover:text-accent-cyan transition-colors flex items-center gap-2"
             >
-              {event.status === 'past' ? 'View Recap' : 'Register Now'}
+              {event.status === 'past' ? 'View Details' : 'Register Now'}
               <ArrowRight size={18} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
             </Link>
           </div>
