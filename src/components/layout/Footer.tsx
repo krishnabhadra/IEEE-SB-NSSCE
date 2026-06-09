@@ -59,6 +59,7 @@ export default function Footer() {
                   alt="IEEE SB NSSCE" 
                   width={250} 
                   height={80} 
+                  style={{ width: 'auto' }}
                   className="w-auto h-12 md:h-16 object-contain brightness-0 invert" 
                 />
               </div>

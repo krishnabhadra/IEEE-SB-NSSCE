@@ -8,7 +8,7 @@ import Image from "next/image";
 import { events } from "@/data/events";
 import { societies } from "@/data/societies";
 
-const EventCard = ({ event }: { event: typeof events[0] }) => {
+const EventCard = ({ event, priority = false }: { event: typeof events[0], priority?: boolean }) => {
   const society = societies.find(s => s.id === event.societyId);
   const eventDate = new Date(event.date);
 
@@ -28,6 +28,8 @@ const EventCard = ({ event }: { event: typeof events[0] }) => {
               src={event.banner} 
               alt={event.title} 
               fill 
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={priority}
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
@@ -210,7 +212,7 @@ export default function EventsPage() {
                 Featured Events
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {featuredEvents.map(event => <EventCard key={event.id} event={event} />)}
+                {featuredEvents.map((event, i) => <EventCard key={event.id} event={event} priority={i < 3} />)}
               </div>
             </motion.div>
           )}
@@ -221,18 +223,7 @@ export default function EventsPage() {
                 Upcoming Events
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {upcomingEvents.map(event => <EventCard key={event.id} event={event} />)}
-              </div>
-            </motion.div>
-          )}
-
-          {pastEvents.length > 0 && (
-            <motion.div key="past-events" layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mb-16">
-              <h2 className="text-2xl font-heading font-black mb-8 inline-block bg-slate-200 text-slate-800 px-6 py-2 rounded-xl border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -rotate-1">
-                Past Events
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {pastEvents.map(event => <EventCard key={event.id} event={event} />)}
+                {upcomingEvents.map((event, i) => <EventCard key={event.id} event={event} priority={i < 3} />)}
               </div>
             </motion.div>
           )}
@@ -243,7 +234,18 @@ export default function EventsPage() {
                 Our Legacy Events
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {legacyEvents.map(event => <EventCard key={event.id} event={event} />)}
+                {legacyEvents.map((event, i) => <EventCard key={event.id} event={event} priority={i < 3} />)}
+              </div>
+            </motion.div>
+          )}
+
+          {pastEvents.length > 0 && (
+            <motion.div key="past-events" layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mb-16">
+              <h2 className="text-2xl font-heading font-black mb-8 inline-block bg-slate-200 text-slate-800 px-6 py-2 rounded-xl border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -rotate-1">
+                Past Events
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {pastEvents.map((event, i) => <EventCard key={event.id} event={event} priority={i < 3} />)}
               </div>
             </motion.div>
           )}

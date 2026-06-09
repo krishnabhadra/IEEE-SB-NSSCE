@@ -15,7 +15,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
   }
 
   const society = societies.find(s => s.id === event.societyId);
-  const isPast = event.status === "past";
+  const isPast = event.status === "past" || event.status === "legacy";
 
   return (
     <div className="min-h-screen pb-20">
@@ -27,6 +27,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
               src={event.banner}
               alt={event.title}
               fill
+              sizes="100vw"
               priority
               className="object-cover opacity-50"
             />

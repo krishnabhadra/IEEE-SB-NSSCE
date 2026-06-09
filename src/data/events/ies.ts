@@ -41,7 +41,7 @@ export const iesEvents: Event[] = [
     venue: "Online",
     price: "Free",
     societyId: "ies",
-    status: "legacy",
+    status: "past",
     banner: "https://sb-dataset.vercel.app/events/ies/e2/1.jpg",
     tags: ["Debate"],
     contacts: [
