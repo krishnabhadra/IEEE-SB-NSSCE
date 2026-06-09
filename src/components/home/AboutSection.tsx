@@ -33,20 +33,20 @@ function AnimatedCounter({ value, label, icon: Icon }: { value: number, label: s
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
-      className="p-6 rounded-xl bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] flex flex-col items-center justify-center text-center relative transition-all duration-300 group"
+      className="p-3 rounded-xl bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] flex flex-col items-center justify-center text-center relative transition-all duration-300 group"
     >
-      <div className="w-14 h-14 rounded-xl bg-[#FFD700] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-black flex items-center justify-center mb-5 group-hover:-translate-y-1 group-hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
-        <Icon size={28} className="stroke-[2.5px]" />
+      <div className="w-8 h-8 rounded-lg bg-[#FFD700] border-2 border-black text-black flex items-center justify-center mb-2 group-hover:-translate-y-1 transition-all duration-300">
+        <Icon size={16} className="stroke-[2.5px]" />
       </div>
 
-      <div className="flex items-baseline gap-1 mb-2">
-        <motion.span className="text-4xl font-heading font-black text-slate-900">
+      <div className="flex items-baseline gap-0.5 mb-1">
+        <motion.span className="text-lg md:text-xl font-heading font-black text-slate-900">
           {displayValue}
         </motion.span>
-        <span className="text-3xl font-black text-ieee-blue drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">+</span>
+        <span className="text-base md:text-lg font-black text-ieee-blue">+</span>
       </div>
 
-      <span className="text-xs font-black text-slate-700 uppercase tracking-widest">{label}</span>
+      <span className="text-[8px] md:text-[9px] font-black text-slate-700 uppercase tracking-wide leading-tight">{label}</span>
     </motion.div>
   );
 }
@@ -92,70 +92,74 @@ export default function AboutSection() {
               </p>
             </div>
 
-            <div className="mt-10 flex gap-4">
-              <div className="flex -space-x-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={`about-avatar-${i}`} className={`w-12 h-12 rounded-full border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center font-bold text-white z-${5 - i}`} style={{ backgroundColor: ['#00629B', '#00C2FF', '#5F9EA0', '#FF9900'][i - 1] }}>
-                    {['C', 'P', 'R', 'W'][i - 1]}
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col justify-center">
-                <span className="font-black text-slate-900">Join 500+ innovators</span>
-                <span className="text-sm text-slate-600 font-bold">in our growing community</span>
-              </div>
+            <div className="mt-10 grid grid-cols-4 gap-2 sm:gap-3">
+              {stats.map((stat) => (
+                <AnimatedCounter key={stat.label} value={stat.value} label={stat.label} icon={stat.icon} />
+              ))}
             </div>
           </motion.div>
 
           {/* Right Side: Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, rotate: -1 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
-            className="relative w-full aspect-[1080/879] max-w-lg mx-auto lg:max-w-none lg:mx-0 mt-10 lg:mt-0"
-          >
-            {/* Neobrutalist shadow layers */}
-            <div className="absolute inset-0 bg-[#FFD700] rounded-3xl translate-x-3 translate-y-3 border-2 border-black transition-transform duration-300 group-hover:translate-x-5 group-hover:translate-y-5"></div>
-            <div className="absolute inset-0 bg-accent-cyan rounded-3xl translate-x-1.5 translate-y-1.5 border-2 border-black"></div>
-
-            {/* Main Image Container */}
-            <div className="relative w-full h-full rounded-3xl border-2 border-black overflow-hidden bg-white z-10 group cursor-pointer">
-              <Image 
-                src="https://sb-dataset.vercel.app/about/about.png"
-                alt="About IEEE SB NSSCE"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                priority
-              />
-              <div className="absolute inset-0 bg-black/10 transition-opacity duration-300 group-hover:opacity-0"></div>
-            </div>
-            
-            {/* Floating badge */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20, rotate: -5 }}
-              whileInView={{ opacity: 1, y: 0, rotate: -5 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="absolute -bottom-4 -left-2 md:-left-6 bg-white py-2 px-4 rounded-xl border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-20 flex items-center gap-2.5 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all duration-300"
+          <div className="flex flex-col w-full mt-10 lg:mt-0">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, rotate: -1 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
+              className="relative w-full aspect-[1080/879] max-w-lg mx-auto lg:max-w-none lg:mx-0"
             >
-              <div className="w-10 h-10 bg-[#FFD700] rounded-full flex items-center justify-center text-black border-2 border-black shadow-[inset_-2px_-2px_0px_rgba(0,0,0,0.2)]">
-                <Trophy size={18} className="stroke-[2.5px]" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-black text-slate-900 leading-none uppercase tracking-wide">Premier</span>
-                <span className="text-xs font-bold text-ieee-blue leading-none mt-1">Student Branch</span>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
+              {/* Neobrutalist shadow layers */}
+              <div className="absolute inset-0 bg-[#FFD700] rounded-3xl translate-x-3 translate-y-3 border-2 border-black transition-transform duration-300 group-hover:translate-x-5 group-hover:translate-y-5"></div>
+              <div className="absolute inset-0 bg-accent-cyan rounded-3xl translate-x-1.5 translate-y-1.5 border-2 border-black"></div>
 
-        {/* Stats Grid Section (Moved below) */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-20 lg:mt-28">
-          {stats.map((stat) => (
-            <AnimatedCounter key={stat.label} value={stat.value} label={stat.label} icon={stat.icon} />
-          ))}
+              {/* Main Image Container */}
+              <div className="relative w-full h-full rounded-3xl border-2 border-black overflow-hidden bg-white z-10 group cursor-pointer">
+                <Image
+                  src="https://sb-dataset.vercel.app/about/about.png"
+                  alt="About IEEE SB NSSCE"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+                <div className="absolute inset-0 bg-black/10 transition-opacity duration-300 group-hover:opacity-0"></div>
+              </div>
+
+              {/* Floating badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20, rotate: -5 }}
+                whileInView={{ opacity: 1, y: 0, rotate: -5 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="absolute -bottom-4 -left-2 md:-left-6 bg-white py-2 px-4 rounded-xl border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-20 flex items-center gap-2.5 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all duration-300"
+              >
+                <div className="w-10 h-10 bg-[#FFD700] rounded-full flex items-center justify-center text-black border-2 border-black shadow-[inset_-2px_-2px_0px_rgba(0,0,0,0.2)]">
+                  <Trophy size={18} className="stroke-[2.5px]" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-black text-slate-900 leading-none uppercase tracking-wide">Premier</span>
+                  <span className="text-xs font-bold text-ieee-blue leading-none mt-1">Student Branch</span>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Avatars below image */}
+            <div className="flex justify-end mt-16 lg:mt-12 w-full">
+              <div className="flex gap-4 items-center">
+                <div className="flex -space-x-3">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={`about-avatar-${i}`} className="w-12 h-12 rounded-full border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center font-bold text-white relative" style={{ backgroundColor: ['#00629B', '#00C2FF', '#5F9EA0', '#FF9900'][i - 1], zIndex: 5 - i }}>
+                      {['C', 'P', 'R', 'W'][i - 1]}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col justify-center text-left">
+                  <span className="font-black text-slate-900 text-sm sm:text-base">Join 500+ innovators</span>
+                  <span className="text-xs sm:text-sm text-slate-600 font-bold">in our growing community</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

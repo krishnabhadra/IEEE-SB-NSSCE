@@ -18,8 +18,7 @@ export default async function SocietyDetailPage({ params }: { params: Promise<{ 
   const societyMembers = members.filter(m => m.societyId === society.id && m.year === 2026);
   const societyEvents = [...events]
     .filter(e => e.societyId === society.id)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 3); // Get latest 3 events
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div className="min-h-screen pb-20">
@@ -98,11 +97,6 @@ export default async function SocietyDetailPage({ params }: { params: Promise<{ 
                   <span className={`w-3 h-8 rounded-full border-2 border-black inline-block shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${society.accentColor}`}></span>
                   Chapter Events
                 </h2>
-                {societyEvents.length > 0 && (
-                  <Link href={`/events?society=${society.id}`} className="text-ieee-blue font-black uppercase tracking-widest hover:underline hidden md:block border-2 border-black px-4 py-2 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                    View All
-                  </Link>
-                )}
               </div>
 
               {societyEvents.length > 0 ? (

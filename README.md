@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IEEE SB NSSCE Official Website
 
-## Getting Started
+Welcome to the official repository for the **IEEE Student Branch NSS College of Engineering (NSSCE)** website! 
 
-First, run the development server:
+This platform is designed to be a premier, dynamic, and state-of-the-art representation of our student branch, its various technical societies, events, achievements, and the incredible community behind it. It is built using modern web technologies to ensure blazing fast performance and a stunning user experience.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠️ Technology Stack
+- **Framework**: [Next.js](https://nextjs.org) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) (Featuring a Neo-brutalist design system)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run the project locally on your machine for testing or development:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/ieee-sb-nssce.git
+   cd ieee-sb-nssce
+   ```
 
-## Learn More
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to view the site.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ⚠️ Important for Maintainers & Juniors
 
-## Deploy on Vercel
+If you are a member of the current or incoming Executive Committee tasked with updating the website's data (such as adding new events, gallery images, or team members), **YOU MUST READ THE RULES FIRST**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+👉 **[Click here to read the Maintenance & Contribution Rules (rule.md)](./rule.md)** 👈
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The `rule.md` file contains strict guidelines on:
+- Git Workflow & Branch Naming Conventions
+- Exactly which files to edit for Events, Members, and Galleries
+- Rules regarding external Image Hosting to prevent repository bloat
+
+Please follow these conventions strictly to keep the codebase clean and optimized for future generations!
+
+## 🤝 Contributing
+Contributions, issues, and feature requests are always welcome! Please check the `rule.md` file before submitting any major pull requests.
+
+---
+*Developed with ❤️ for IEEE SB NSSCE by IEEE WebTeam | Execom 2026*
