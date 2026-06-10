@@ -25,7 +25,6 @@ export const iesEvents: Event[] = [
       "https://sb-dataset.vercel.app/events/ies/e1/4.jpg",
       "https://sb-dataset.vercel.app/events/ies/e1/5.jpg",
       "https://sb-dataset.vercel.app/events/ies/e1/6.jpg",
-      "https://sb-dataset.vercel.app/events/ies/e1/7.jpg",
       "https://sb-dataset.vercel.app/events/ies/e1/8.jpg",
       "https://sb-dataset.vercel.app/events/ies/e1/9.jpg",
       "https://sb-dataset.vercel.app/events/ies/e1/10.jpg"

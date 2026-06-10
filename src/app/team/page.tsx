@@ -266,7 +266,7 @@ export default function TeamPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8"
           >
             {filteredMembers.map((member, index) => (
               <motion.div
@@ -280,10 +280,10 @@ export default function TeamPage() {
                 <div className="absolute inset-0 bg-ieee-blue translate-x-2 translate-y-2 rounded-xl pointer-events-none transition-transform duration-300 group-hover:translate-x-0 group-hover:translate-y-0" />
 
                 {/* Main Card */}
-                <div className="relative h-full w-full bg-white border-2 border-black p-4 md:p-5 rounded-xl z-10 flex flex-col items-center text-center transition-transform duration-300 transform group-hover:translate-x-1 group-hover:translate-y-1">
+                <div className="relative h-full w-full bg-white border-2 border-black p-3 sm:p-4 md:p-5 rounded-xl z-10 flex flex-col items-center text-center transition-transform duration-300 transform group-hover:translate-x-1 group-hover:translate-y-1">
 
                   {/* Photo Container (Square Polaroid style) */}
-                  <div className="relative w-full aspect-square rounded-lg border-2 border-black bg-slate-50 overflow-hidden mb-5 flex items-center justify-center text-5xl text-slate-300 font-bold shadow-inner">
+                  <div className="relative w-full aspect-square rounded-lg border-2 border-black bg-slate-50 overflow-hidden mb-3 sm:mb-5 flex items-center justify-center text-5xl text-slate-300 font-bold shadow-inner">
                     {member.photo ? (
                       <Image
                         src={member.photo}
@@ -299,7 +299,7 @@ export default function TeamPage() {
 
                   {/* Text Container */}
                   <div className="flex flex-col items-center flex-grow w-full justify-between">
-                    <h3 className="font-heading font-black text-xl mb-4 text-slate-900 leading-tight">
+                    <h3 className="font-heading font-black text-base sm:text-xl mb-3 sm:mb-4 text-slate-900 leading-tight">
                       {member.name}
                     </h3>
 
