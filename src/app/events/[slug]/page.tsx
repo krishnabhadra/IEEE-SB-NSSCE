@@ -127,8 +127,12 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {event.speakers.map((speaker, idx) => (
                     <div key={idx} className="p-6 rounded-xl bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all flex gap-4 items-start">
-                      <div className="w-16 h-16 rounded-full bg-slate-100 flex-shrink-0 flex items-center justify-center border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
-                        <User size={24} className="text-slate-400" />
+                      <div className="relative w-16 h-16 rounded-full bg-slate-100 flex-shrink-0 flex items-center justify-center border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+                        {speaker.photo ? (
+                          <Image src={speaker.photo} alt={speaker.name} fill sizes="64px" className="object-cover" />
+                        ) : (
+                          <User size={24} className="text-slate-400" />
+                        )}
                       </div>
                       <div>
                         <h3 className="font-heading font-black text-xl text-slate-900">{speaker.name}</h3>
