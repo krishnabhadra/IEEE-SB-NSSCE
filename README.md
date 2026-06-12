@@ -5,8 +5,8 @@ Welcome to the official repository for the **IEEE Student Branch NSS College of 
 This platform is designed to be a premier, dynamic, and state-of-the-art representation of our student branch, its various technical societies, events, achievements, and the incredible community behind it. It is built using modern web technologies to ensure blazing fast performance and a stunning user experience.
 
 ## 🛠️ Technology Stack
-- **Framework**: [Next.js](https://nextjs.org) (App Router)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com) (Featuring a Neo-brutalist design system)
+- **Framework**: [Next.js](https://nextjs.org)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com)
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Icons**: [Lucide React](https://lucide.dev/)
 
