@@ -43,10 +43,10 @@ export const metadata: Metadata = {
     siteName: "IEEE SB NSSCE",
     images: [
       {
-        url: "/logo.png",
+        url: "/meta-image.jpg",
         width: 1200,
         height: 630,
-        alt: "IEEE SB NSSCE Logo",
+        alt: "IEEE SB NSSCE Website Preview",
       },
     ],
   },
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "IEEE SB NSSCE | Innovating Since 1987",
     description: "Official Website of IEEE Student Branch NSS College of Engineering, Palakkad.",
-    images: ["/logo.png"],
+    images: ["/meta-image.jpg"],
   },
   robots: {
     index: true,
